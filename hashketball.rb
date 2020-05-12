@@ -144,7 +144,6 @@ def get_stats(player_name, stat=nil)
   end
 end
 
-# Write code here
 def num_points_scored(player_name)
   get_stats(player_name, :points)
 end
