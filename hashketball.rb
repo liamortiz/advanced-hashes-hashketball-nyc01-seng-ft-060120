@@ -180,7 +180,7 @@ def player_stats(player_name)
 end
 
 def big_shoe_rebounds
-  points = 0
+  rebounds = 0
   prev_size = 0
   
   [game_hash[:away][:players], game_hash[:home][:players]].flatten.each_with_index do |player_object, index|
@@ -189,6 +189,6 @@ def big_shoe_rebounds
       points = player_object[:rebounds]
     end
   end
-  points
+  rebounds
 end
 
