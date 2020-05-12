@@ -126,13 +126,16 @@ def game_hash
   }
 end
 
-def get_stat(player_name, stat)
+def get_stat(player_name, stat=nil)
   game_hash.each_pair do |parent_key, parent_value|
     parent_value.each_pair do |child_key, child_value|
 
       if child_key == :players
         child_value.each do |player_object|
           if player_object[:player_name] == player_name
+            if !stat
+              return player_object
+            end
             return player_object[stat]
           end
         end
@@ -146,21 +149,41 @@ def num_points_scored(player_name)
   get_stat(player_name, :points)
 end
 
-def num_points_scored(player_name)
+def shoe_size(player_name)
   get_stat(player_name, :shoe)
 end
 
-def team_colors
+def team_colors(team_name)
+  if game_hash[:home][:team_name] == team_name
+    return game_hash[:home][:colors]
+  end
+
+  if game_hash[:away][:team_name] == team_name
+    return game_hash[:away][:colors]
+  end
 end
 
 def team_names
+  [game_hash[:home][:team_name], game_hash[:away][:team_name]]
 end
 
-def player_numbers
+def player_numbers(team_name)
+  numbers = []
+  sym = game_hash[:home][:team_name] == team_name ? :home : :away
+  game_hash[sym][:players].each do |player_object|
+    player_object.each_pair do |key, value|
+      if key == :number
+        numbers << value
+      end
+    end
+  end
+  numbers
 end
 
-def player_stats
+def player_stats(player_name)
+  get_stat(player_name)
 end
 
 def big_shoe_rebounds
 end
+
