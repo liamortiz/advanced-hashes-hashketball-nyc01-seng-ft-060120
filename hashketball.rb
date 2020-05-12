@@ -186,7 +186,7 @@ def big_shoe_rebounds
   [game_hash[:away][:players], game_hash[:home][:players]].flatten.each_with_index do |player_object, index|
     if prev_size < player_object[:shoe]
       prev_size = player_object[:shoe]
-      points = player_object[:points]
+      points = player_object[:rebounds]
     end
   end
   points
