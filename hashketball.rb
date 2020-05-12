@@ -126,4 +126,41 @@ def game_hash
   }
 end
 
+def get_stat(player_name, stat)
+  game_hash.each_pair do |parent_key, parent_value|
+    parent_value.each_pair do |child_key, child_value|
+
+      if child_key == :players
+        child_value.each do |player_object|
+          if player_object[:player_name] == player_name
+            return player_object[stat]
+          end
+        end
+      end
+    end
+  end
+end
+
 # Write code here
+def num_points_scored(player_name)
+  get_stat(player_name, :points)
+end
+
+def num_points_scored(player_name)
+  get_stat(player_name, :shoe)
+end
+
+def team_colors
+end
+
+def team_names
+end
+
+def player_numbers
+end
+
+def player_stats
+end
+
+def big_shoe_rebounds
+end
