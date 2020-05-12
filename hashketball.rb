@@ -126,7 +126,7 @@ def game_hash
   }
 end
 
-def get_stat(player_name, stat=nil)
+def get_stats(player_name, stat=nil)
   game_hash.each_pair do |parent_key, parent_value|
     parent_value.each_pair do |child_key, child_value|
 
@@ -146,21 +146,16 @@ end
 
 # Write code here
 def num_points_scored(player_name)
-  get_stat(player_name, :points)
+  get_stats(player_name, :points)
 end
 
 def shoe_size(player_name)
-  get_stat(player_name, :shoe)
+  get_stats(player_name, :shoe)
 end
 
 def team_colors(team_name)
-  if game_hash[:home][:team_name] == team_name
-    return game_hash[:home][:colors]
-  end
-
-  if game_hash[:away][:team_name] == team_name
-    return game_hash[:away][:colors]
-  end
+  sym = game_hash[:home][:team_name] == team_name ? :home : :away
+  game_hash[sym][:colors]
 end
 
 def team_names
@@ -181,7 +176,7 @@ def player_numbers(team_name)
 end
 
 def player_stats(player_name)
-  get_stat(player_name)
+  get_stats(player_name)
 end
 
 def big_shoe_rebounds
